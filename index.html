@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahul Rokade — Data Analyst &amp; AI Builder</title>
+  <meta name="description" content="Portfolio of Rahul Rokade — Data Analyst and B.Tech student building data pipelines, ML models, and LLM-powered tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#0B1220;
+      --panel:#111C31;
+      --panel-2:#0E1729;
+      --line:#233350;
+      --text:#E7ECF5;
+      --muted:#8C9AB4;
+      --teal:#45D6C4;
+      --amber:#F2B84B;
+      --indigo:#7C8BFF;
+      --radius:10px;
+      --mono:'JetBrains Mono', ui-monospace, monospace;
+      --sans:'Inter', system-ui, sans-serif;
+    }
+    *{box-sizing:border-box; margin:0; padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(69,214,196,0.07), transparent 60%),
+        radial-gradient(1000px 500px at 90% 0%, rgba(124,139,255,0.06), transparent 60%),
+        var(--ink);
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.6;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    a{color:inherit; text-decoration:none;}
+    ::selection{background:var(--teal); color:#04211D;}
+    :focus-visible{outline:2px solid var(--teal); outline-offset:3px; border-radius:4px;}
+
+    .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+    /* NAV */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(11,18,32,0.75);
+      border-bottom:1px solid var(--line);
+    }
+    nav.wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+    .logo{font-family:var(--mono); font-weight:700; font-size:15px; letter-spacing:0.5px;}
+    .logo span{color:var(--teal);}
+    .navlinks{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--muted);}
+    .navlinks a:hover{color:var(--text);}
+    .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--text); border-radius:6px; padding:6px 10px; font-family:var(--mono); font-size:12px;}
+
+    /* HERO */
+    .hero{padding:96px 0 72px;}
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:var(--mono); font-size:12px; color:var(--teal);
+      border:1px solid rgba(69,214,196,0.35); background:rgba(69,214,196,0.07);
+      padding:5px 10px; border-radius:20px; margin-bottom:22px;
+    }
+    .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--teal); animation:pulse 1.8s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.3;}}
+
+    h1{font-size:clamp(32px,5vw,52px); font-weight:800; line-height:1.12; letter-spacing:-1px;}
+    h1 .accent{color:var(--teal);}
+    .lede{color:var(--muted); font-size:18px; max-width:560px; margin-top:18px;}
+
+    .hero-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:start; margin-top:52px;}
+    @media(max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+
+    .cta-row{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
+    .btn{
+      font-family:var(--mono); font-size:13px; padding:12px 18px; border-radius:8px;
+      border:1px solid var(--line); transition:all .15s ease;
+    }
+    .btn.primary{background:var(--teal); color:#04211D; border-color:var(--teal); font-weight:700;}
+    .btn.primary:hover{background:#5EE6D5;}
+    .btn.ghost{color:var(--text);}
+    .btn.ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+    /* TERMINAL */
+    .terminal{
+      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    }
+    .term-bar{display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--panel-2); border-bottom:1px solid var(--line);}
+    .term-bar .d{width:10px; height:10px; border-radius:50%;}
+    .d.r{background:#FF5F57;} .d.y{background:#FEBC2E;} .d.g{background:#28C840;}
+    .term-title{margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--muted);}
+    .term-body{padding:20px; font-family:var(--mono); font-size:13.5px; min-height:230px;}
+    .term-body .line{color:var(--muted); margin-bottom:4px;}
+    .term-body .prompt{color:var(--teal);}
+    .term-body .kw{color:var(--indigo);}
+    .term-body .str{color:var(--amber);}
+    #typed{color:var(--text); white-space:pre-wrap;}
+    .cursor{display:inline-block; width:8px; height:15px; background:var(--teal); vertical-align:middle; animation:blink 1s step-end infinite;}
+    @keyframes blink{50%{opacity:0;}}
+    .result{margin-top:16px; border-top:1px dashed var(--line); padding-top:14px; opacity:0; transform:translateY(6px); transition:all .5s ease;}
+    .result.show{opacity:1; transform:translateY(0);}
+    .result table{width:100%; border-collapse:collapse; font-size:12.5px;}
+    .result th{text-align:left; color:var(--teal); font-weight:600; padding-bottom:6px; border-bottom:1px solid var(--line);}
+    .result td{padding:6px 0; color:var(--text); border-bottom:1px solid var(--line);}
+    .result td.muted{color:var(--muted);}
+
+    /* SECTIONS */
+    section{padding:80px 0; border-top:1px solid var(--line);}
+    .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:38px;}
+    .sec-tag{font-family:var(--mono); font-size:12px; color:var(--amber); border:1px solid rgba(242,184,75,0.35); background:rgba(242,184,75,0.06); padding:4px 9px; border-radius:6px;}
+    h2{font-size:26px; font-weight:800; letter-spacing:-0.5px;}
+    .sec-sub{color:var(--muted); font-size:14.5px; margin-top:-26px; margin-bottom:36px; max-width:640px;}
+
+    /* ABOUT */
+    .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+    @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+    .about-grid p{color:var(--muted); margin-bottom:14px; font-size:15px;}
+    .about-grid strong{color:var(--text);}
+    .stat-list{display:flex; flex-direction:column; gap:0;}
+    .stat{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--line); font-family:var(--mono); font-size:13px;}
+    .stat span:first-child{color:var(--muted);}
+    .stat span:last-child{color:var(--teal);}
+
+    /* SKILLS */
+    .skill-cols{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
+    @media(max-width:700px){.skill-cols{grid-template-columns:1fr;}}
+    .skill-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px;}
+    .skill-card h3{font-family:var(--mono); font-size:12px; color:var(--teal); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;}
+    .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+    .chip{font-family:var(--mono); font-size:12px; color:var(--text); background:var(--panel-2); border:1px solid var(--line); padding:6px 10px; border-radius:6px;}
+
+    /* PROJECTS */
+    .proj-table{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+    .proj-row{
+      display:grid; grid-template-columns:200px 1fr 130px; gap:18px;
+      padding:22px; border-bottom:1px solid var(--line); background:var(--panel);
+      transition:background .15s ease;
+    }
+    .proj-row:last-child{border-bottom:none;}
+    .proj-row:hover{background:var(--panel-2);}
+    @media(max-width:760px){.proj-row{grid-template-columns:1fr; gap:10px;}}
+    .proj-idx{font-family:var(--mono); font-size:11px; color:var(--amber); margin-bottom:4px;}
+    .proj-name{font-weight:700; font-size:16px;}
+    .proj-desc{color:var(--muted); font-size:14px; margin-top:6px; line-height:1.55;}
+    .proj-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+    .tag{font-family:var(--mono); font-size:10.5px; color:var(--indigo); background:rgba(124,139,255,0.08); border:1px solid rgba(124,139,255,0.25); padding:3px 7px; border-radius:5px;}
+    .proj-link{align-self:center; font-family:var(--mono); font-size:12px; color:var(--teal); text-align:right; white-space:nowrap;}
+    .proj-link:hover{text-decoration:underline;}
+    @media(max-width:760px){.proj-link{text-align:left;}}
+
+    /* TIMELINE / LOG */
+    .log{position:relative; padding-left:26px;}
+    .log::before{content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line);}
+    .log-item{position:relative; padding-bottom:32px;}
+    .log-item:last-child{padding-bottom:0;}
+    .log-item::before{content:''; position:absolute; left:-26px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--ink); border:2px solid var(--teal);}
+    .log-date{font-family:var(--mono); font-size:11.5px; color:var(--amber);}
+    .log-title{font-weight:700; margin-top:4px; font-size:15px;}
+    .log-desc{color:var(--muted); font-size:14px; margin-top:4px; max-width:600px;}
+
+    /* CONTACT */
+    .contact-box{
+      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      padding:40px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+    }
+    .contact-box h2{margin-bottom:8px;}
+    .contact-links{display:flex; gap:14px; flex-wrap:wrap;}
+
+    footer{padding:32px 0; text-align:center; font-family:var(--mono); font-size:12px; color:var(--muted); border-top:1px solid var(--line);}
+    footer .fill{color:var(--amber);}
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important;}
+    }
+
+    /* CHATBOT WIDGET */
+    .chat-fab{
+      position:fixed; bottom:24px; right:24px; z-index:100;
+      width:56px; height:56px; border-radius:50%;
+      background:var(--teal); color:#04211D; border:none;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.35);
+      font-size:22px; padding:0;
+    }
+    .chat-fab svg{display:block;}
+    .chat-window{
+      position:fixed; bottom:92px; right:24px; z-index:100;
+      width:340px; max-width:calc(100vw - 32px); height:440px;
+      background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+      display:none; flex-direction:column; overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,0.45);
+    }
+    .chat-window.open{display:flex;}
+    .chat-head{
+      padding:14px 16px; background:var(--panel-2); border-bottom:1px solid var(--line);
+      font-family:var(--mono); font-size:13px; color:var(--text);
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .chat-head button{background:none; border:none; color:var(--muted); font-size:16px; cursor:pointer;}
+    .chat-body{flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px;}
+    .chat-msg{font-size:13.5px; line-height:1.5; max-width:85%; padding:8px 12px; border-radius:8px;}
+    .chat-msg.bot{background:var(--panel-2); color:var(--text); align-self:flex-start;}
+    .chat-msg.user{background:var(--teal); color:#04211D; align-self:flex-end;}
+    .chat-msg.error{background:rgba(255,95,87,0.12); color:#FF9B93; align-self:flex-start;}
+    .chat-input-row{display:flex; border-top:1px solid var(--line);}
+    .chat-input-row input{
+      flex:1; background:none; border:none; color:var(--text); padding:12px 14px;
+      font-family:var(--sans); font-size:13.5px; outline:none;
+    }
+    .chat-input-row button{
+      background:none; border:none; color:var(--teal); font-family:var(--mono);
+      font-size:13px; padding:0 16px; cursor:pointer;
+    }
+    .chat-typing{font-size:12px; color:var(--muted); font-family:var(--mono);}
+  </style>
+  </head>
+  <body>
+
+  <header>
+    <nav class="wrap">
+      <div class="logo">rahul<span>@</span>rokade</div>
+      <div class="navlinks">
+        <a href="#work">work</a>
+        <a href="#skills">skills</a>
+        <a href="#about">about</a>
+        <a href="#contact">contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <section class="hero" style="border-top:none;">
+      <div class="eyebrow"><span class="dot"></span> OPEN TO DATA ANALYST · AGENTIC AI · AI/ML ROLES</div>
+      <div class="hero-grid">
+        <div>
+          <h1>Turning raw data into <span class="accent">decisions</span> — and shipping AI tools that act on them.</h1>
+          <p class="lede">I'm Rahul Rokade, a Data Analyst and B.Tech student. I build pipelines, dashboards, ML models, and LLM-powered apps — then deploy them so people can actually use them.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#work">View Projects →</a>
+            <a class="btn ghost" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn ghost" href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href="https://drive.google.com/file/d/1T_Cz9pwUy16GX9dwWrOqlVNMHLHNDRzb/view?usp=drive_link" target="_blank" rel="noopener">Resume</a>
+            <a class="btn ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="terminal">
+          <div class="term-bar">
+            <div class="d r"></div><div class="d y"></div><div class="d g"></div>
+            <div class="term-title">rahul.sql</div>
+          </div>
+          <div class="term-body">
+            <div class="line"><span class="prompt">mysql&gt;</span> <span id="typed"></span><span class="cursor" id="cur"></span></div>
+            <div class="result" id="resultBox">
+              <table>
+                <thead><tr><th>name</th><th>role</th><th>stack</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>Rahul Rokade</td>
+                    <td class="muted">Data Analyst</td>
+                    <td class="muted">Python · SQL · ML · LLMs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="sec-head"><span class="sec-tag">01</span><h2>about</h2></div>
+      <div class="about-grid">
+        <div>
+          <p>I'm a <strong>detail-oriented Data Analyst</strong> with hands-on experience in Power BI, SQL, Python, and Machine Learning. I build interactive dashboards, analyze complex datasets, and turn raw numbers into actionable business insight.</p>
+          <p>I hold a <strong>B.Tech in Electronics and Computer Engineering</strong> from Sanjivani College of Engineering, Kopargaon, and I'm currently deepening my analytics practice through the Coding Ninjas Data Analytics Job Bootcamp.</p>
+          <p>Alongside core analytics, I've been integrating <strong>LLM APIs</strong> — Claude, GPT-4o, LLaMA 3, Gemini — into real pipelines and tools, and containerizing them with Docker for reliable deployment. I'm also going deeper into <strong>agentic AI</strong>, building spec-driven, tool-using workflows with Claude Code — and that's the direction I want my next role to grow in.</p>
+        </div>
+        <div class="stat-list">
+          <div class="stat"><span>education</span><span>B.Tech, Electronics &amp; Computer Eng.</span></div>
+          <div class="stat"><span>college</span><span>Sanjivani College of Engineering, Kopargaon</span></div>
+          <div class="stat"><span>core stack</span><span>Python · SQL · Power BI</span></div>
+          <div class="stat"><span>ml stack</span><span>Scikit-learn · TensorFlow/PyTorch</span></div>
+          <div class="stat"><span>llm providers</span><span>Claude · GPT-4o · LLaMA 3 · Gemini</span></div>
+          <div class="stat"><span>currently</span><span>Data Analytics Bootcamp + Agentic AI</span></div>
+          <div class="stat"><span>looking for</span><span>Agentic AI · AI/ML · Data Analyst roles</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sec-head"><span class="sec-tag">02</span><h2>skills</h2></div>
+      <p class="sec-sub">Grouped by where they show up in a project — from raw data to a deployed interface.</p>
+      <div class="skill-cols">
+        <div class="skill-card">
+          <h3>Languages &amp; Query</h3>
+          <div class="chip-row">
+            <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">PySpark</span>
+            <span class="chip">SQL / MySQL</span><span class="chip">ETL</span><span class="chip">Query Optimization</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Analytics &amp; BI Tools</h3>
+          <div class="chip-row">
+            <span class="chip">Power BI (DAX)</span><span class="chip">Power Query</span><span class="chip">Excel (VLOOKUP, Macros)</span>
+            <span class="chip">Tableau</span><span class="chip">Google Data Studio</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>ML &amp; Data Science</h3>
+          <div class="chip-row">
+            <span class="chip">Scikit-learn</span><span class="chip">TensorFlow</span><span class="chip">PyTorch</span>
+            <span class="chip">Deep Learning</span><span class="chip">Data Science</span><span class="chip">NLP</span><span class="chip">YOLO</span><span class="chip">Matplotlib / Seaborn</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>LLMs &amp; Deployment</h3>
+          <div class="chip-row">
+            <span class="chip">Claude 3.5 Sonnet</span><span class="chip">GPT-4o</span><span class="chip">LLaMA 3</span><span class="chip">Groq API</span>
+            <span class="chip">Gemini 1.5 Pro</span><span class="chip">LangChain</span><span class="chip">OpenAI Agents SDK</span>
+            <span class="chip">Streamlit / FastAPI / Django</span><span class="chip">Docker</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Agentic AI</h3>
+          <div class="chip-row">
+            <span class="chip">Claude Code</span><span class="chip">Spec Kit</span><span class="chip">Vibe Coding</span><span class="chip">Spec-Driven Development</span><span class="chip">Agentic Workflows</span>
+            <span class="chip">Multi-step Tool Use</span><span class="chip">GitHub Automation (PyGithub)</span><span class="chip">Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Cloud &amp; Deployment</h3>
+          <div class="chip-row">
+            <span class="chip">Azure</span><span class="chip">Google Cloud</span><span class="chip">Docker</span><span class="chip">Git / GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="sec-head"><span class="sec-tag">03</span><h2>projects</h2></div>
+      <p class="sec-sub">Selected work — each shipped end-to-end, from raw data to a live deployment.</p>
+      <div class="proj-table">
+
+        <div class="proj-row">
+          <div><div class="proj-idx">APR 2026</div><div class="proj-name">Claude AI Data Pipeline</div></div>
+          <div>
+            <div class="proj-desc">Data pipeline that gathers source data via natural-language prompts to the Claude API, supplements it with local CSV/JSON seeds and GitHub content pulled through PyGithub, then transforms and auto-commits structured JSON/CSV outputs straight to a GitHub repo — no git CLI required.</div>
+            <div class="proj-tags"><span class="tag">Anthropic API</span><span class="tag">Python</span><span class="tag">PyGithub</span><span class="tag">Prompt Engineering</span></div>
+          </div>
+          <a class="proj-link" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">View repo →</a>
+        </div>
+
+        <div class="proj-row">
+          <div><div class="proj-idx">MAR 2026</div><div class="proj-name">Sales &amp; Revenue Analytics Dashboard</div></div>
+          <div>
+            <div class="proj-desc">End-to-end sales analytics solution: extracted from MySQL, transformed with Pandas, visualized in Power BI. RFM-segmented 10,000+ customers (~15% campaign ROI lift), forecasted quarterly revenue at 92% accuracy, and automated weekly reporting to save 5+ hours/week.</div>
+            <div class="proj-tags"><span class="tag">MySQL</span><span class="tag">Pandas</span><span class="tag">Power BI</span><span class="tag">RFM</span><span class="tag">Forecasting</span></div>
+          </div>
+          <a class="proj-link" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">View repo →</a>
+        </div>
+
+        <div class="proj-row">
+          <div><div class="proj-idx">FEB 2026</div><div class="proj-name">AI Data Analyst Chatbot</div></div>
+          <div>
+            <div class="proj-desc">Converts plain-English questions into SQL using LLaMA 3 via Groq, so non-technical users can query CSV/Excel data with no SQL knowledge. Plotly auto-generates charts, cutting manual reporting effort by 70%. Live on Streamlit Cloud with multi-turn conversation memory.</div>
+            <div class="proj-tags"><span class="tag">Groq</span><span class="tag">LLaMA 3</span><span class="tag">Streamlit</span><span class="tag">Plotly</span><span class="tag">NL-to-SQL</span></div>
+          </div>
+          <a class="proj-link" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">View repo →</a>
+        </div>
+
+        <div class="proj-row">
+          <div><div class="proj-idx">NOV 2025</div><div class="proj-name">DeskMate</div></div>
+          <div>
+            <div class="proj-desc">Real-time AI desktop assistant combining YOLO-based object detection with NLP voice command recognition. Analyzed gesture interaction logs in Pandas to improve command recognition accuracy by 20%.</div>
+            <div class="proj-tags"><span class="tag">YOLO</span><span class="tag">OpenCV</span><span class="tag">NLP</span><span class="tag">Pandas</span></div>
+          </div>
+          <a class="proj-link" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">View repo →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sec-head"><span class="sec-tag">04</span><h2>log</h2></div>
+      <p class="sec-sub">A running changelog — experience and milestones, most recent first.</p>
+      <div class="log">
+        <div class="log-item">
+          <div class="log-date">JAN 2026 — IN PROGRESS</div>
+          <div class="log-title">Coding Ninjas — Data Analytics Job Bootcamp</div>
+          <div class="log-desc">Intensive training across Python, MySQL, Power BI, Excel, Statistics, and BI concepts — with hands-on dashboards, EDA, and predictive analytics projects.</div>
+        </div>
+        <div class="log-item">
+          <div class="log-date">2026</div>
+          <div class="log-title">Certifications</div>
+          <div class="log-desc">Data Visualization with Power BI (Coding Ninjas) · Data Analysis with Python (IBM) · Data Analytics Job Simulation (Deloitte)</div>
+        </div>
+        <div class="log-item">
+          <div class="log-date">APR — JUN 2025</div>
+          <div class="log-title">Data Analytics Intern — ABB India Ltd, Nashik</div>
+          <div class="log-desc">Designed a daily dynamic inventory management report in Power BI with real-time visualizations and automated alerts. Built DAX measures and slicers for drill-down analytics, and automated data refresh workflows — cutting report prep time by 60%.</div>
+        </div>
+        <div class="log-item">
+          <div class="log-date">DEC 2021 — JUN 2025</div>
+          <div class="log-title">B.Tech, Electronics &amp; Computer Engineering</div>
+          <div class="log-desc">Sanjivani College of Engineering, Kopargaon — CGPA 6.7</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sec-head"><span class="sec-tag">05</span><h2>contact</h2></div>
+      <div class="contact-box">
+        <div>
+          <h2>Let's build something with data.</h2>
+          <p style="color:var(--muted); font-size:14.5px;">Open to Data Analyst and applied AI roles — reach out any time.</p>
+          <p style="color:var(--muted); font-size:13px; margin-top:10px; font-family:var(--mono);">rahulrokade312@gmail.com &nbsp;·&nbsp; +91 77960 72363</p>
+        </div>
+        <div class="contact-links">
+          <a class="btn primary" href="mailto:rahulrokade312@gmail.com">Email me</a>
+          <a class="btn ghost" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <button class="chat-fab" id="chatFab" aria-label="Open chat">
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="34" height="34">
+      <defs>
+        <linearGradient id="fabFaceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1d5c52"/>
+          <stop offset="100%" stop-color="#0e2e29"/>
+        </linearGradient>
+        <linearGradient id="fabEyeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c8fff5"/>
+          <stop offset="100%" stop-color="#45D6C4"/>
+        </linearGradient>
+      </defs>
+      <line x1="60" y1="24" x2="60" y2="14" stroke="#0e2e29" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="11" r="4.5" fill="#0e2e29"/>
+      <rect x="28" y="24" width="64" height="54" rx="20" fill="url(#fabFaceGrad)" stroke="#0e2e29" stroke-width="2"/>
+      <rect x="20" y="42" width="8" height="18" rx="4" fill="#0e2e29"/>
+      <rect x="92" y="42" width="8" height="18" rx="4" fill="#0e2e29"/>
+      <circle cx="46" cy="51" r="8" fill="url(#fabEyeGrad)"/>
+      <circle cx="74" cy="51" r="8" fill="url(#fabEyeGrad)"/>
+      <circle cx="46" cy="51" r="3" fill="#0B1220"/>
+      <circle cx="74" cy="51" r="3" fill="#0B1220"/>
+      <path d="M46 65 Q60 74 74 65" stroke="#c8fff5" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M40 78 Q60 92 80 78 L78 96 Q60 104 42 96 Z" fill="url(#fabFaceGrad)" stroke="#0e2e29" stroke-width="2"/>
+    </svg>
+  </button>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-head">
+      <span>Ask about Rahul</span>
+      <button id="chatClose" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">Hi! Ask me anything about Rahul's experience, skills, or projects.</div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="Type a question..." />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    built by Rahul Rokade &middot; update <span class="fill">LinkedIn / GitHub</span> links before deploying
+  </footer>
+
+  <script>
+    // Typing animation for hero terminal
+    const query = "SELECT name, role, stack FROM analysts WHERE name = 'Rahul Rokade';";
+    const el = document.getElementById('typed');
+    const cur = document.getElementById('cur');
+    const resultBox = document.getElementById('resultBox');
+    let i = 0;
+
+    function typeChar(){
+      if (i < query.length){
+        el.textContent += query.charAt(i);
+        i++;
+        setTimeout(typeChar, 28 + Math.random()*35);
+      } else {
+        cur.style.display = 'none';
+        setTimeout(() => resultBox.classList.add('show'), 250);
+      }
+    }
+
+    // Respect reduced motion: skip animation, show final state instantly
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced){
+      el.textContent = query;
+      cur.style.display = 'none';
+      resultBox.classList.add('show');
+    } else {
+      setTimeout(typeChar, 500);
+    }
+
+    // Chatbot widget
+    // Local backend for development
+    const CHAT_API_URL = "http://127.0.0.1:5000/api/chat";
+    const chatFab = document.getElementById('chatFab');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatClose = document.getElementById('chatClose');
+    const chatBody = document.getElementById('chatBody');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    let chatHistory = [];
+
+    chatFab.addEventListener('click', () => {
+      chatWindow.classList.toggle('open');
+      if (chatWindow.classList.contains('open')) chatInput.focus();
+    });
+    chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+    function addMessage(text, cls){
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + cls;
+      div.textContent = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      return div;
+    }
+
+    async function sendMessage(){
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      chatInput.value = '';
+      chatInput.disabled = true;
+
+      const typing = addMessage('Thinking...', 'error');
+      typing.classList.remove('error');
+      typing.classList.add('bot');
+      typing.classList.add('chat-typing');
+
+      try {
+        const res = await fetch(CHAT_API_URL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({message: text, history: chatHistory})
+        });
+        const data = await res.json();
+        typing.remove();
+        if (data.error){
+          addMessage('Sorry, something went wrong. Please try again.', 'error');
+        } else {
+          addMessage(data.reply, 'bot');
+          chatHistory.push({role:'user', content:text});
+          chatHistory.push({role:'assistant', content:data.reply});
+        }
+      } catch (err) {
+        typing.remove();
+        addMessage('Could not reach the server. Please try again.', 'error');
+      } finally {
+        chatInput.disabled = false;
+        chatInput.focus();
+      }
+    }
+
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+
+  </body>
+  </html>
