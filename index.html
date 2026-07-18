@@ -245,7 +245,7 @@
           <div class="cta-row">
             <a class="btn primary" href="#work">View Projects →</a>
             <a class="btn ghost" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn ghost" href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href="https://www.linkedin.com/in/rahul-rokade-a813b3286 " target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn ghost" href="https://drive.google.com/file/d/1T_Cz9pwUy16GX9dwWrOqlVNMHLHNDRzb/view?usp=drive_link" target="_blank" rel="noopener">Resume</a>
             <a class="btn ghost" href="#contact">Get in touch</a>
           </div>
@@ -350,6 +350,24 @@
       <div class="proj-table">
 
         <div class="proj-row">
+          <div><div class="proj-idx">JUL 2026</div><div class="proj-name">AI Software Engineering Agent</div></div>
+          <div>
+            <div class="proj-desc">Multi-agent dev automation platform: a FastAPI service safely executes untrusted, LLM-generated Python code inside an isolated Docker sandbox (no network access, resource limits, non-root, ephemeral filesystem), forming the verification layer for downstream agents. LangGraph-based bug-fix and code-generation agents follow a generate-run-in-sandbox-evaluate loop via Groq, retrying once on failure. A top-level orchestrator classifies incoming tasks and routes them to the right specialist, plus a PR-review agent that fetches a GitHub PR diff (PyGithub) and posts an LLM-generated review as a real comment.</div>
+            <div class="proj-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">LangGraph</span><span class="tag">Groq API</span><span class="tag">PyGithub</span><span class="tag">Claude Code</span></div>
+          </div>
+          <a class="proj-link" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">View repo →</a>
+        </div>
+
+        <div class="proj-row">
+          <div><div class="proj-idx">JUN 2026</div><div class="proj-name">AI Travel Planner Agent</div></div>
+          <div>
+            <div class="proj-desc">Agentic trip-planning app built around a LangGraph agent (FastAPI backend) that decides when to call external tools before producing a final travel plan, paired with a Streamlit chat interface for the end user. Backend and frontend are containerized separately and deployed as independent Google Cloud Run services, using Secret Manager for API keys instead of plaintext env vars — with environment-driven configuration so the same codebase runs locally and in production with zero code changes.</div>
+            <div class="proj-tags"><span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Groq API</span><span class="tag">Google Cloud Run</span></div>
+          </div>
+          <a class="proj-link" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">View repo →</a>
+        </div>
+
+        <div class="proj-row">
           <div><div class="proj-idx">APR 2026</div><div class="proj-name">Claude AI Data Pipeline</div></div>
           <div>
             <div class="proj-desc">Data pipeline that gathers source data via natural-language prompts to the Claude API, supplements it with local CSV/JSON seeds and GitHub content pulled through PyGithub, then transforms and auto-commits structured JSON/CSV outputs straight to a GitHub repo — no git CLI required.</div>
@@ -426,7 +444,7 @@
         <div class="contact-links">
           <a class="btn primary" href="mailto:rahulrokade312@gmail.com">Email me</a>
           <a class="btn ghost" href="https://github.com/rahulrokade214" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn ghost" href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/rahul-rokade-a813b3286/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
